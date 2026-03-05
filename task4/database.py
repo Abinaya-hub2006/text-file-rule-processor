@@ -17,12 +17,12 @@ def ensure_db():
     cursor = conn.cursor()
 
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS uploaded_texts (
+        CREATE TABLE IF NOT EXISTS text_analysis (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            filename TEXT,
-            content TEXT,
+            chunk TEXT,
             score INTEGER,
             sentiment TEXT,
+            matched_rules TEXT,
             timestamp TEXT
         )
     """)
@@ -31,16 +31,16 @@ def ensure_db():
     conn.close()
 
 
-def insert_record(filename, content, score, sentiment):
+def insert_record(chunk, score, sentiment, matched_rules):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute("""
-        INSERT INTO uploaded_texts (filename, content, score, sentiment, timestamp)
+        INSERT INTO text_analysis (chunk, score, sentiment, matched_rules, timestamp)
         VALUES (?, ?, ?, ?, ?)
-    """, (filename, content, score, sentiment, timestamp))
+    """, (chunk, score, sentiment, matched_rules, timestamp))
 
     conn.commit()
     conn.close()
@@ -51,8 +51,8 @@ def fetch_records():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT id, filename, score, sentiment, timestamp
-        FROM uploaded_texts
+        SELECT chunk, score, sentiment, matched_rules, timestamp
+        FROM text_analysis
         ORDER BY id DESC
     """)
 

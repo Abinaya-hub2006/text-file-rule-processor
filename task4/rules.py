@@ -1,28 +1,30 @@
 # task4/rules.py
 
-POSITIVE = ["excellent", "amazing", "great", "fantastic", "love", "wonderful"]
-NEGATIVE = ["worst", "terrible", "bad", "awful", "hate", "boring"]
+POSITIVE = ["excellent", "amazing", "great", "fantastic", "love"]
+NEGATIVE = ["worst", "terrible", "bad", "awful", "hate"]
 
 
-def calculate_score(text):
+def analyze_text(chunk):
     score = 0
-    text = text.lower()
+    matched_rules = []
+
+    text = chunk.lower()
 
     for word in POSITIVE:
         if word in text:
             score += 3
+            matched_rules.append(word)
 
     for word in NEGATIVE:
         if word in text:
             score -= 3
+            matched_rules.append(word)
 
-    return score
-
-
-def assign_sentiment(score):
     if score > 2:
-        return "Positive"
+        sentiment = "Positive"
     elif score < -2:
-        return "Negative"
+        sentiment = "Negative"
     else:
-        return "Neutral"
+        sentiment = "Neutral"
+
+    return score, sentiment, ", ".join(matched_rules)
