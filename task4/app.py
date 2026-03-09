@@ -1,55 +1,70 @@
-# task4/app.py
-
 import streamlit as st
-from rules import analyze_text
-from database import ensure_db, insert_record, fetch_records
+from pathlib import Path
+from ui import load_css
 
-st.set_page_config(page_title="Task 4 - Text Analyzer", layout="wide")
+st.set_page_config(
+    page_title=" Text Processing Dashboard",
+    layout="wide"
+)
+load_css()
+BASE_DIR = Path(__file__).parent
+css_path = BASE_DIR / "assets" / "style.css"
 
-st.title("📄 Task 4 - Rule Based Text Analyzer")
+if css_path.exists():
+    css = css_path.read_text()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-ensure_db()
+st.title("  Text Processing Dashboard")
 
-uploaded_file = st.file_uploader("Upload a text file", type=["txt"])
+st.markdown("""
+Welcome to the **Rule-Based  Text Analyzer**.
 
-if uploaded_file is not None:
+This system allows you to:
 
-    content = uploaded_file.read().decode("utf-8")
+ Upload text files  
+ Perform rule-based sentiment analysis  
+ Visualize results  
+ Store analysis in database  
+ Generate email reports  
 
-    st.subheader("Uploaded Content")
-    st.text_area("Preview", content, height=200)
+Use the **sidebar navigation** to explore features.
+""")
+st.markdown(
+"""
+<style>
+@keyframes glow {
+0% {text-shadow:0 0 5px red;}
+50% {text-shadow:0 0 20px red;}
+100% {text-shadow:0 0 5px red;}
+}
 
-    st.subheader("Processing Results")
+h1 {
+animation: glow 3s infinite;
+}
+</style>
+""",
+unsafe_allow_html=True
+)
 
-    chunks = content.split("\n")
+col1, col2, col3 = st.columns(3)
 
-    for chunk in chunks:
+with col1:
+    st.info("📂 Upload Text Files")
 
-        if chunk.strip():
+with col2:
+    st.success("📊 View Analysis Results")
 
-            score, sentiment, rules = analyze_text(chunk)
+with col3:
+    st.warning("📧 Email Reports")
 
-            insert_record(chunk, score, sentiment, rules)
+st.divider()
+st.caption("Streamlit Text Processing System")
 
-    st.success("Processing completed and stored in database.")
+from database import fetch_file_history
 
-st.markdown("---")
+st.sidebar.title("📂 Recent Files")
 
-st.header("📊 Stored Records")
+files = fetch_file_history()
 
-records = fetch_records()
-
-if records:
-    st.dataframe(
-        records,
-        use_container_width=True,
-        column_config={
-            0: "Chunk",
-            1: "Score",
-            2: "Sentiment",
-            3: "Matched Rules",
-            4: "Timestamp"
-        }
-    )
-else:
-    st.info("No records found.")
+for f in files[:5]:
+    st.sidebar.write("📄", f)

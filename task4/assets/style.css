@@ -1,0 +1,162 @@
+/* ---------- Import Modern Font ---------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Poppins:wght@400;600;700&display=swap');
+
+
+/* ---------- App Background ---------- */
+
+html, body, [data-testid="stAppViewContainer"] {
+    background: radial-gradient(circle at top, #1a0000, #000000 60%);
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+
+/* ---------- Main Container ---------- */
+
+.main .block-container {
+    background: linear-gradient(180deg,#050000,#000000);
+    padding: 40px;
+}
+
+
+/* ---------- Title ---------- */
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    color: #ff2e2e;
+    letter-spacing: 2px;
+    text-shadow: 0px 0px 15px rgba(255,0,0,0.7);
+}
+
+
+/* ---------- Section Titles ---------- */
+
+h2,h3 {
+    font-weight: 700;
+    color: #ff4d4d;
+}
+
+
+/* ---------- Sidebar ---------- */
+
+section[data-testid="stSidebar"] {
+
+    background: linear-gradient(180deg,#000000,#140000);
+
+    border-right: 2px solid #ff2e2e;
+
+    box-shadow: 0 0 20px rgba(255,0,0,0.3);
+}
+
+
+/* ---------- Sidebar Text ---------- */
+
+section[data-testid="stSidebar"] * {
+    color: white;
+    font-weight: 600;
+}
+
+
+/* ---------- Cards ---------- */
+
+.stAlert {
+
+    background: linear-gradient(145deg,#1a0000,#000000);
+
+    border: 1px solid #ff2e2e;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0px 0px 10px rgba(255,0,0,0.5),
+        inset 0px 0px 10px rgba(255,0,0,0.2);
+}
+
+
+/* ---------- Buttons ---------- */
+
+.stButton>button {
+
+    background: linear-gradient(145deg,#ff1a1a,#8b0000);
+
+    color: white;
+
+    font-weight: 700;
+
+    border-radius: 6px;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    box-shadow: 0px 0px 12px rgba(255,0,0,0.8);
+
+    transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+
+    transform: scale(1.05);
+
+    box-shadow: 0px 0px 20px rgba(255,0,0,1);
+}
+
+
+/* ---------- Upload Box ---------- */
+
+.stFileUploader {
+
+    border: 2px dashed #ff2e2e;
+
+    background: #0a0000;
+
+    border-radius: 10px;
+
+    padding: 15px;
+}
+
+
+/* ---------- Data Table ---------- */
+
+.stDataFrame {
+
+    border: 1px solid #ff2e2e;
+
+    border-radius: 10px;
+
+    box-shadow: 0px 0px 15px rgba(255,0,0,0.4);
+}
+
+
+/* ---------- Charts ---------- */
+
+.js-plotly-plot {
+
+    background: #0d0000;
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    border: 1px solid #ff2e2e;
+
+    box-shadow: 0px 0px 12px rgba(255,0,0,0.5);
+}
+
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff1a1a;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000;
+}
