@@ -35,4 +35,10 @@ Example:
 | great | +2 |
 | terrible | -2 |
 | bad | -2 |
+<img width="1918" height="906" alt="image" src="https://github.com/user-attachments/assets/2ea86a01-9536-4dca-9dbe-374360476874" />
+
+<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/271a9c26-73a6-47ad-b68c-2b100eccc2ba" />
+
+<img width="1919" height="968" alt="image" src="https://github.com/user-attachments/assets/4022b512-d275-4428-a14b-f2b9d04eb6a2" />
+
 
