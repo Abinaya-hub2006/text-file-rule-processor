@@ -11,27 +11,25 @@ NEGATIVE_WORDS = [
 "dull","embarrassing","faulty","frustrating","gross","harmful","hostile","inferior"
 ]
 
+import re
 
-def analyze_chunk(chunk):
+def analyze_text(chunk):
 
     score = 0
     matched = []
 
-    text = chunk.lower()
+    text = re.sub(r'[^\w\s]', '', chunk.lower())
 
-    # Check positive words
     for word in POSITIVE_WORDS:
         if word in text:
             score += 2
             matched.append(word)
 
-    # Check negative words
     for word in NEGATIVE_WORDS:
         if word in text:
             score -= 2
             matched.append(word)
 
-    # Decide sentiment AFTER loops
     if score > 0:
         sentiment = "Positive"
     elif score < 0:

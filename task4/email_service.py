@@ -1,28 +1,30 @@
 import smtplib
-import os
 from email.message import EmailMessage
 
+def send_email(receiver_email, pdf_path):
 
-def send_email(receiver, pdf_file):
+    sender_email = "abinayak829@gmail.com"
+    app_password = "ckfo ynox gzcp ldde"
 
-    sender = "abinayak829@gmail.com"
-    password = os.getenv("EMAIL_PASSWORD")
 
     msg = EmailMessage()
-    msg["Subject"] = "Text Analysis Report"
-    msg["From"] = sender
-    msg["To"] = receiver
 
-    msg.set_content("Attached is your report.")
+    msg["Subject"] = "Sentiment Analysis Report"
+    msg["From"] = sender_email
+    msg["To"] = receiver_email
 
-    with open(pdf_file, "rb") as f:
-        msg.add_attachment(
-            f.read(),
-            maintype="application",
-            subtype="pdf",
-            filename="report.pdf"
-        )
+    msg.set_content("Your sentiment analysis report is attached.")
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(sender, password)
+    with open(pdf_path, "rb") as f:
+        file_data = f.read()
+
+    msg.add_attachment(
+        file_data,
+        maintype="application",
+        subtype="pdf",
+        filename="report.pdf"
+    )
+
+    with smtplib.SMTP_SSL("smtp.gmail.com",465) as smtp:
+        smtp.login(sender_email, app_password)
         smtp.send_message(msg)
